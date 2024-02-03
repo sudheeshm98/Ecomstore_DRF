@@ -16,3 +16,7 @@ class Smartphones(models.Model):
     image_url = models.URLField(max_length=2083)
     smartphones_available = models.BooleanField()
 
+    def __str__(self):
+        return self.title
+
+

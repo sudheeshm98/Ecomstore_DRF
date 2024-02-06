@@ -15,4 +15,5 @@ class ListSmartphones(ListCreateAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        return Response({'object_list': queryset})
+        serializer = SmartphoneSerializer(queryset, many=True)
+        return Response(serializer.data)

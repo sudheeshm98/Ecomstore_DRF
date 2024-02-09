@@ -11,8 +11,8 @@ from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIVi
 
 
 class ListSmartphones(ListCreateAPIView):
-    serializer_class = SmartphoneSerializer
     queryset = Smartphones.objects.all()
+    serializer_class = SmartphoneSerializer
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()

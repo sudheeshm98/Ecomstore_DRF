@@ -28,5 +28,3 @@ class Cart(models.Model):
     product = models.ForeignKey(Smartphones, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
-
-

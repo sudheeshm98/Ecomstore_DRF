@@ -12,15 +12,18 @@ from .serializers import SmartphoneSerializer, CartSerializer
 
 
 class ListSmartphones(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Smartphones.objects.all()
     serializer_class = SmartphoneSerializer
 
-    def list(self,request):
+    def list(self, request):
         queryset = self.get_queryset()
         serializer = SmartphoneSerializer(queryset, many=True)
         return Response(serializer.data)
 
+
 class DetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = SmartphoneSerializer
     queryset = Smartphones.objects.all()
 
@@ -28,15 +31,18 @@ class DetailView(generics.RetrieveUpdateDestroyAPIView):
         queryset = self.get_object()
         if queryset is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = SmartphoneSerializer(queryset,many=False)
+        serializer = SmartphoneSerializer(queryset, many=False)
         return Response(serializer.data)
 
+
 class UpdateView(generics.UpdateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Smartphones.objects.all()
     serializer_class = SmartphoneSerializer
 
 
 class DeleteView(generics.DestroyAPIView):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Smartphones.objects.all()
     serializer_class = SmartphoneSerializer
 
@@ -57,4 +63,3 @@ class AddToCartView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except ObjectDoesNotExist:
             return Response({"error": "Product not found."}, status=status.HTTP_404_NOT_FOUND)
-
